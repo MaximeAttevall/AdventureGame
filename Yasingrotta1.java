@@ -1,0 +1,2 @@
+public class Yasingrotta1 {
+}

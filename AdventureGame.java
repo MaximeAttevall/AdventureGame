@@ -41,13 +41,6 @@ public class AdventureGame {
 
 
 
-
-
-
-
-
-
-
         for (int i = 1; i <= 5; i++) {
             JButton button = createButton("Button " + i);
             buttonPanel.add(button);
