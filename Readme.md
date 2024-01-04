@@ -1,11 +1,11 @@
 Program: Äventyrsspel
 
 Funktioner:
-Val Baserat spel
+Valbaserat spel
 Snygga bilder
 Bilder som ändras baserat på val
 Experience (kanske)
-Berättelse Baserat spel med 5 olika Huvudalternativ
+Berättelsebaserat spel med 5 olika huvudalternativ
 Varje person i gruppen bestämmer sin egna väg med olika val
 När man väljer fel val, dör man och börjar om igen. (börjar med det)
 Samma dödsbild
