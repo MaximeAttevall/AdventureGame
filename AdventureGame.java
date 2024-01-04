@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+
+
 
 
 public class AdventureGame {
@@ -16,57 +17,30 @@ public class AdventureGame {
     private GamePanel gamePanel;
     private BufferedImage dragonImage;
     private BufferedImage background;
+    private BufferedImage darkCaveImage;
 
     public AdventureGame() {
         loadImages();
         initComponents();
     }
-    // Draw the image on to the buffered image
-    Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
 
-
-
-    private void drawCenteredString(Graphics g, String text, int width, int yPos) {
-        FontMetrics metrics = g.getFontMetrics();
-        int x = (width - metrics.stringWidth(text)) / 2;
-        g.setColor(Color.RED);
-        g.drawString(text, x, yPos);
-    }
     private void loadImages() {
         try {
             BufferedImage originalDragonImage = ImageIO.read(new File("images/testdrka.png"));
-            dragonImage = toBufferedImage(originalDragonImage.getScaledInstance(300, 300, Image.SCALE_SMOOTH));
-            background = ImageIO.read(new File("images/darkcaveny.png"));
+            Image scaledImage = originalDragonImage.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
+            dragonImage = new BufferedImage(500, 300, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = dragonImage.createGraphics();
+            g2d.drawImage(scaledImage, 0, 0, null);
+            g2d.dispose();
+
+            background = ImageIO.read(new File("images/darkcaveny.png")); // Original background
+            darkCaveImage = ImageIO.read(new File("images/darkcave.png")); // Dark cave image for choices
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Failed to load images.", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
-
-
-    /**
-     * Converts a given Image into a BufferedImage
-     *
-     * @param img The Image to be converted
-     * @return The converted BufferedImage
-     */
-    public static BufferedImage toBufferedImage(Image img) {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
-        }
-
-        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-
-        return bimage;
-    }
-
 
     private void initComponents() {
         frame = new JFrame("Äventyrsspelet");
@@ -79,19 +53,19 @@ public class AdventureGame {
 
         cave1Button = createButton("Grotta 1");
         cave2Button = createButton("Grotta 2");
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(cave1Button);
-        buttonPanel.add(cave2Button);
-
+        cave3Button = createButton("Grotta 3");
 
         cave1Button.addActionListener(e -> processChoice(1));
         cave2Button.addActionListener(e -> processChoice(2));
+        cave3Button.addActionListener(e -> processChoice(3));
+
+
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
         buttonPanel.setOpaque(false);
         buttonPanel.add(cave1Button);
         buttonPanel.add(cave2Button);
+        buttonPanel.add(cave3Button);
 
         gamePanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -110,7 +84,7 @@ public class AdventureGame {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setForeground(Color.RED);
+                button.setForeground(Color.green);
             }
 
             @Override
@@ -122,21 +96,59 @@ public class AdventureGame {
     }
 
     private void processChoice(int choice) {
+        cave1Button.setVisible(false); // Hide buttons after a choice
+        cave2Button.setVisible(false);
+
+        if (choice == 1) {
+            gamePanel.setBackgroundImage(darkCaveImage); // Set dark cave background
+            JOptionPane.showMessageDialog(frame, "Du är närmare utgången grattis");
+        } else if (choice == 2) {
+            gamePanel.setBackgroundImage(darkCaveImage); // Set dark cave background with dragon
+            gamePanel.setDragonVisible(true); // Make dragon visible
+            JOptionPane.showMessageDialog(frame, "Du förlorade, monstret kommer äta dig!");
+        }
+        else if  (choice == 3) {
+            gamePanel.setBackgroundImage(darkCaveImage);
+            gamePanel.setDragonVisible(false);
+            JOptionPane.showMessageDialog(frame, "Du är påväg till grotta 3! ");
+
+        }
+
+        else if  (choice == 4) {
+            gamePanel.setBackgroundImage(darkCaveImage);
+            gamePanel.setDragonVisible(false);
+            JOptionPane.showMessageDialog(frame, "Du är påväg till grotta 3! ");
+
+        }
+
+
+        else if {
+            gamePanel.setBackgroundImage(darkCaveImage);
+
+        }
+        gamePanel.repaint(); // Repaint to update the visuals
     }
 
-
     private class GamePanel extends JPanel {
+        private boolean dragonVisible = false; // Flag to control dragon visibility
+
+        public void setBackgroundImage(BufferedImage image) {
+            background = image; // Change the background image
+        }
+
+        public void setDragonVisible(boolean visible) {
+            dragonVisible = visible;
+        }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            // Draw the background image, scaled to fill the panel
             g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), this);
-            // Draw the dragon image
-            int x = (this.getWidth() - dragonImage.getWidth(null)) / 2;
-            int y = (this.getHeight() - dragonImage.getHeight(null)) / 2;
-            g.drawImage(dragonImage, x, y, this);
-
-            // Draw the welcome text over the dragon image
+            if (dragonVisible) {
+                int x = (this.getWidth() - dragonImage.getWidth(null)) / 2;
+                int y = (this.getHeight() - dragonImage.getHeight(null)) / 2;
+                g.drawImage(dragonImage, x, y, this); // Draw dragon only if visible
+            }
             g.setFont(new Font("Pixel Emulator", Font.BOLD, 36));
             drawCenteredString(g, "Välkommen to the Adventure!", getWidth(), 100);
         }
