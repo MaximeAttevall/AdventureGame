@@ -1,0 +1,2 @@
+public class YasinGrotta3 {
+}
