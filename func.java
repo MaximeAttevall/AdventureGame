@@ -7,7 +7,7 @@ public class func {
     // Strängen som ska stå i den filen lagras
     private static final String COUNTER_KEY = "Deathcounter";
 
-    public static void incrementDeathcounter() throws IOException {
+    public static void Die() throws IOException {
         // Hämta det aktuella räknarvärdet från filen
         int currentCount = readJsonFromFile();
         
