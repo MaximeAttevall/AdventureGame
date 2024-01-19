@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Path2 {
 
-    // Huvudmetod där programmet startar123
+    // Huvudmetod där programmet startar
     public static void main(String[] args) {
         FörstaVägskälet();
     }
