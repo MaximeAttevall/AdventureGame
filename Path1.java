@@ -20,6 +20,7 @@ public class Path1 {
     private static String currentBackgroundPath = WINNING_BACKGROUND_PATH;
     private static JFrame frame;
 
+
     public static void main(String[] args) {
         currentBackgroundPath = WINNING_BACKGROUND_PATH;
 
@@ -184,3 +185,17 @@ public class Path1 {
         frame.dispose();
     }
 }
+/*
+
+public class Encounter {
+ public Encounter(
+    String backgroundImagePath,
+    String option1Text,
+    String option2Text
+    ){
+    this.backgroundImagePath = backgroundImagePath;
+    this.option1Text = option1Text;
+    this.option2Text = option2Text;
+    }
+}
+ */
