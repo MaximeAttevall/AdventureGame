@@ -87,6 +87,7 @@ public class Path2 {
                     break;
                 case 1:
                     System.out.println("Win");
+                    func.Win();
                     break;
                 case 2:
                     System.out.println("Action 3 Tredje");
