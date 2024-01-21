@@ -42,9 +42,11 @@ public class AdventureGame {
 
 
         for (int i = 1; i <= 5; i++) {
-            JButton button = createButton("Button " + i);
+            String filePath = "Path" + i + ".java";
+            JButton button = createButton("Button " + i, filePath);
             buttonPanel.add(button);
         }
+        
 
         gamePanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -52,28 +54,55 @@ public class AdventureGame {
         frame.setVisible(true);
     }
 
-    private JButton createButton(String text) {
+    private JButton createButton(String text, String filePath) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Pixel Emulator", Font.BOLD, 18)); // Custom retro font
+        button.setFont(new Font("Pixel Emulator", Font.BOLD, 18));
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
         button.setOpaque(false);
-        button.setForeground(new Color(255, 0, 0)); // Set button color to red
-
+        button.setForeground(new Color(255, 0, 0));
+    
         button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setForeground(new Color(139, 0, 0)); // Dark red on hover
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    executeJavaFile(filePath);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-
+    
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setForeground(new Color(139, 0, 0));
+            }
+    
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setForeground(new Color(255, 0, 0)); // Red when not hovered
+                button.setForeground(new Color(255, 0, 0));
             }
         });
         return button;
     }
+
+    private void executeJavaFile(String filePath) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder("javac", filePath);
+        Process compileProcess = processBuilder.start();
+        
+        try {
+            int exitCode = compileProcess.waitFor();
+            if (exitCode == 0) {
+                ProcessBuilder runProcessBuilder = new ProcessBuilder("java", filePath.replace(".java", ""));
+                runProcessBuilder.start();
+            } else {
+                System.out.println("Compilation failed.");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     private class GamePanel extends JPanel {
         @Override
