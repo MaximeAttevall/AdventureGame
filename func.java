@@ -10,6 +10,9 @@ public class func {
     // Strängen som ska stå i den filen lagras
     private static final String COUNTER_KEY = "Deathcounter";
 
+    /**
+     * Visar dialogruta med dödsbilden samt hur många gånger man har dött
+     */
     public static void Die() throws IOException {
         // Hämta det aktuella räknarvärdet från filen
         int currentCount = readJsonFromFile();
@@ -28,6 +31,21 @@ public class func {
 
         // Visar bilden i dialogruta med info om hur många gånger man dött som titel
         JOptionPane.showMessageDialog(null, imageIcon, "You've died " + newCount + " times", JOptionPane.PLAIN_MESSAGE);
+    }
+
+
+    /**
+     * Visar dialogruta med vinstbilden
+     */
+    public static void Win() throws IOException{
+        // Sparar filvägen till bilden när man dör som en variabel
+        String imagePath = "Images/win.png";
+
+        // Skapar en imageIcon med övre strängens filväg
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+
+        // Visar bilden i dialogruta med info om hur många gånger man dött som titel
+        JOptionPane.showMessageDialog(null, imageIcon, "You found the exit!", JOptionPane.PLAIN_MESSAGE);
     }
     
     //Här kontrolleras om filen som anges på rad 5 existerar
