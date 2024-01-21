@@ -1,5 +1,8 @@
 import java.io.*;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 public class func {
 
     // Sökvägen till filen "statistics.json" lagras
@@ -16,6 +19,15 @@ public class func {
         
         // Spara det nya räknarvärdet till filen
         writeJsonToFile(newCount);
+
+        // Sparar filvägen till bilden när man dör som en variabel
+        String imagePath = "Images/youdied.jpg";
+
+        // Skapar en imageIcon med övre strängens filväg
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+
+        // Visar bilden i dialogruta med info om hur många gånger man dött som titel
+        JOptionPane.showMessageDialog(null, imageIcon, "You've died " + newCount + " times", JOptionPane.PLAIN_MESSAGE);
     }
     
     //Här kontrolleras om filen som anges på rad 5 existerar
