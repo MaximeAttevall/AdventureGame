@@ -94,9 +94,12 @@ public class Path1 {
     }
 
     private static void ToScene2(ActionEvent e) {
-        currentBackgroundPath = END_BACKGROUND_PATH;
-        updateBackground();
-
+        frame.dispose();
+        try {
+            func.Die();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
     private static void ToScene3(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You decided to help the person, the person will now follow along with you through the woods");
