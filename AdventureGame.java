@@ -43,7 +43,7 @@ public class AdventureGame {
 
         for (int i = 1; i <= 5; i++) {
             String filePath = "Path" + i + ".java";
-            JButton button = createButton("Button " + i, filePath);
+            JButton button = createButton("Path " + i, filePath);
             buttonPanel.add(button);
         }
         
@@ -87,7 +87,7 @@ public class AdventureGame {
     }
 
     private void executeJavaFile(String filePath) throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder("javac", filePath);
+        ProcessBuilder processBuilder = new ProcessBuilder("javac", "-encoding", "UTF-8", filePath);
         Process compileProcess = processBuilder.start();
         
         try {
