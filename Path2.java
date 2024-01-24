@@ -15,21 +15,18 @@ public class Path2 {
         String[] buttons = {"integer x;", "variable x;", "int x;"};
         int result = showOptionDialog("Första vägskälet", null, "Images/Grotta2_1.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Startar om ("Dör") eller går vidare till nästa quiz på det valda alternativet. Frågan i sig är på bilden
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Första");
                     func.Die();
                     FörstaVägskälet();
                     break;
                 case 1:
-                    System.out.println("Action 2 Första");
                     func.Die();
                     FörstaVägskälet();
                     break;
                 case 2:
-                    System.out.println("Action 3 Första");
                     AndraVägskälet();
                     break;
                 default:
@@ -46,20 +43,17 @@ public class Path2 {
         String[] buttons = {"int numbers[] = new int[5];", "int numbers[5] = {1, 2, 3, 4, 5};", "int[] numbers = new int[];"};
         int result = showOptionDialog("Andra vägskälet", null, "Images/Grotta2_2.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Börjar om från början eller går vidare till quiz 3 beroende på svar
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Andra");
                     TredjeVägskälet();
                     break;
                 case 1:
-                    System.out.println("Action 2 Andra");
                     func.Die();
                     FörstaVägskälet();
                     break;
                 case 2:
-                    System.out.println("Action 3 Andra");
                     func.Die();
                     FörstaVägskälet();
                     break;
@@ -77,20 +71,18 @@ public class Path2 {
         String[] buttons = {"loop (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5) { }"};
         int result = showOptionDialog("Tredje vägskälet", null, "Images/Grotta2_3.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Startar om spelet eller kör Win funktionen och stänger sedan programmet.
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Tredje");
                     func.Die();
                     FörstaVägskälet();
                     break;
                 case 1:
-                    System.out.println("Win");
+                    func.Win();
                     func.Win();
                     break;
                 case 2:
-                    System.out.println("Action 3 Tredje");
                     func.Die();
                     FörstaVägskälet();
                     break;
