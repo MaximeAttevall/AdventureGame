@@ -10,7 +10,7 @@ public class Path2 {
     }
 
     // Metod för det första vägskälet
-    private static void forstaVagskalet() {
+    public static int forstaVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"integer x;", "variable x;", "int x;"};
         int result = showOptionDialog("Första vägskälet", null, "Images/Grotta2_1.jpg", buttons);
@@ -35,10 +35,11 @@ public class Path2 {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return result;
     }
 
     // Metod för det andra vägskälet
-    private static void andraVagskalet() {
+    public static int andraVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"int numbers[] = new int[5];", "int numbers[5] = {1, 2, 3, 4, 5};", "int[] numbers = new int[];"};
         int result = showOptionDialog("Andra vägskälet", null, "Images/Grotta2_2.jpg", buttons);
@@ -63,10 +64,11 @@ public class Path2 {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return result;
     }
 
     // Metod för det tredje vägskälet
-    private static void tredjeVagskalet() {
+    public static int tredjeVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"loop (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5) { }"};
         int result = showOptionDialog("Tredje vägskälet", null, "Images/Grotta2_3.jpg", buttons);
@@ -91,10 +93,11 @@ public class Path2 {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return result;
     }
 
     // Metod för att visa en dialog med anpassad bakgrundsbild och knappar
-    private static int showOptionDialog(String title, String message, String imagePath, String[] buttons) {
+    public static int showOptionDialog(String title, String message, String imagePath, String[] buttons) {
         // Skapar en anpassad JOptionPane med en bakgrundsbild och knappar
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JLabel(new ImageIcon(imagePath)), BorderLayout.CENTER);

@@ -13,13 +13,13 @@ public class func {
     /**
      * Visar dialogruta med dödsbilden samt hur många gånger man har dött
      */
-    public static void Die() throws IOException {
+    public static int Die() throws IOException {
         // Hämta det aktuella räknarvärdet från filen
         int currentCount = readJsonFromFile();
-        
+
         // Öka räknaren med ett
         int newCount = currentCount + 1;
-        
+
         // Spara det nya räknarvärdet till filen
         writeJsonToFile(newCount);
 
@@ -31,6 +31,8 @@ public class func {
 
         // Visar bilden i dialogruta med info om hur många gånger man dött som titel
         JOptionPane.showMessageDialog(null, imageIcon, "You've died " + newCount + " times", JOptionPane.PLAIN_MESSAGE);
+
+        return newCount;
     }
 
 
@@ -49,7 +51,7 @@ public class func {
     }
     
     //Här kontrolleras om filen som anges på rad 5 existerar
-    private static int readJsonFromFile() throws IOException {
+    public static int readJsonFromFile() throws IOException {
         File file = new File(JSON_FILE_PATH);
         
         //Finns inte filen så anropas metoden writeJsonToFile som skapar filen
@@ -74,7 +76,7 @@ public class func {
         return 0;
     }
     // skapar en BufferedWriter som öppnar filen för att skriva
-    private static void writeJsonToFile(int value) throws IOException {
+    public static void writeJsonToFile(int value) throws IOException {
         // Anger den lagrade filvägen till statistics.json
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(JSON_FILE_PATH))) {
             // Skriver den lagrade stränger + : + (Nya dödsantalet)
