@@ -134,7 +134,7 @@ public class Path1 {
 
         showOptions("You see a strange Deer infront of you, do you approach the deer?",
                 "Yes", "No",
-                Path1::ToScene6, Path1::ToScene4);
+                Path1::ToScene6, Path1::ToScene5);
 
     }
 
