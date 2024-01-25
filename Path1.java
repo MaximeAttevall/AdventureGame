@@ -36,7 +36,7 @@ public class Path1 {
     }
 
     // Skapar min JFrame
-    private static JFrame createFrame() {
+    static JFrame createFrame() {
         JFrame frame = new JFrame("AdventureGame"); // Skapa ny Jframe med en titel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // När vår jframe stängs ner avslutas koden också
         frame.setSize(800, 600); // Storlek
@@ -88,7 +88,7 @@ public class Path1 {
         JButton option1Button = new JButton(option1Text);
         JButton option2Button = new JButton(option2Text);
 
-        // Assosicera actionlistener med våra knapar, så något händer ifall vi clickar på dom.
+        // Associera actionlistener med våra knapar, så något händer ifall vi clickar på dom.
         option1Button.addActionListener(option1Listener);
         option2Button.addActionListener(option2Listener);
 
@@ -106,7 +106,7 @@ public class Path1 {
     // En av mina Actionlisteners (vad som händer när man klickar på en knapp)
     private static void ToScene1(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You continue into the woods");
-        currentBackgroundPath = OPTION1A_BACKGROUND_PATH; // Ändrar backgrunds bild till vår frame
+        currentBackgroundPath = OPTION1A_BACKGROUND_PATH; // Ändrar backgrunds bild till våran frame
         updateBackground(); // Uppdaterar
 
         // Kallar på vår showOptions metod och tar oss vidare till våra nästa scener med två olika val.
@@ -134,7 +134,7 @@ public class Path1 {
 
         showOptions("You see a strange Deer infront of you, do you approach the deer?",
                 "Yes", "No",
-                Path1::ToScene6, Path1::ToScene4);
+                Path1::ToScene6, Path1::ToScene5);
 
     }
 
@@ -177,7 +177,7 @@ public class Path1 {
         currentBackgroundPath = WINNING_BACKGROUND_PATH;
         updateBackground();
 
-        JOptionPane.showMessageDialog(frame, "Congratulations you see the light and have exited the woods!");
+        JOptionPane.showMessageDialog(frame, "Congratulations you can see the light and have exited the woods!");
     }
 
     private static void ToScene8(ActionEvent e) {
@@ -225,7 +225,7 @@ public class Path1 {
                 Path1::ToScene12, Path1::ToScene2);
     }
     private static void ToScene12(ActionEvent e) {
-        JOptionPane.showMessageDialog(frame, "You suddendly appear infront of a strange deer in the woods");
+        JOptionPane.showMessageDialog(frame, "You suddendly appear in front of a strange deer in the woods");
 
         currentBackgroundPath = OPTION1A1_BACKGROUND_PATH;
         updateBackground();
