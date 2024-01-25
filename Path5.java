@@ -138,7 +138,11 @@ public class Path5 extends JFrame{
                             func.Die();
                         } else {
                             updateBG("Images/win.png");
+                            for (JButton button : buttons) {
+                                button.setVisible(false); // eller button.setEnabled(false) om du vill inaktivera dem istället
+                            }
                             updateScene();
+                            description.setText("Du hittade utgången");
                             func.Win();
                         }
                         break;
