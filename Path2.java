@@ -6,31 +6,28 @@ public class Path2 {
 
     // Huvudmetod där programmet startar
     public static void main(String[] args) {
-        FörstaVägskälet();
+        forstaVagskalet();
     }
 
     // Metod för det första vägskälet
-    private static void FörstaVägskälet() {
+    private static void forstaVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"integer x;", "variable x;", "int x;"};
         int result = showOptionDialog("Första vägskälet", null, "Images/Grotta2_1.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Startar om ("Dör") eller går vidare till nästa quiz på det valda alternativet. Frågan i sig är på bilden
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Första");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 case 1:
-                    System.out.println("Action 2 Första");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 case 2:
-                    System.out.println("Action 3 Första");
-                    AndraVägskälet();
+                    andraVagskalet();
                     break;
                 default:
                     break;
@@ -41,27 +38,24 @@ public class Path2 {
     }
 
     // Metod för det andra vägskälet
-    private static void AndraVägskälet() {
+    private static void andraVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"int numbers[] = new int[5];", "int numbers[5] = {1, 2, 3, 4, 5};", "int[] numbers = new int[];"};
         int result = showOptionDialog("Andra vägskälet", null, "Images/Grotta2_2.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Börjar om från början eller går vidare till quiz 3 beroende på svar
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Andra");
-                    TredjeVägskälet();
+                    tredjeVagskalet();
                     break;
                 case 1:
-                    System.out.println("Action 2 Andra");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 case 2:
-                    System.out.println("Action 3 Andra");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 default:
                     break;
@@ -72,27 +66,24 @@ public class Path2 {
     }
 
     // Metod för det tredje vägskälet
-    private static void TredjeVägskälet() {
+    private static void tredjeVagskalet() {
         // Skapar en array med knappar och visar en dialog med en bild
         String[] buttons = {"loop (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5; i++) { }", "for (int i = 0; i < 5) { }"};
         int result = showOptionDialog("Tredje vägskälet", null, "Images/Grotta2_3.jpg", buttons);
 
-        // Utför åtgärder baserat på det valda alternativet
+        // Startar om spelet eller kör Win funktionen och stänger sedan programmet.
         try {
             switch (result) {
                 case 0:
-                    System.out.println("Action 1 Tredje");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 case 1:
-                    System.out.println("Win");
                     func.Win();
                     break;
                 case 2:
-                    System.out.println("Action 3 Tredje");
                     func.Die();
-                    FörstaVägskälet();
+                    forstaVagskalet();
                     break;
                 default:
                     break;
