@@ -12,12 +12,14 @@ import java.awt.event.ActionListener;
 //import java.io.IOException;
 
 public class Path5 extends JFrame{
-    private JPanel button_panel;
-    private JButton[] buttons = new JButton[3];
-    private JButton restartBtn;
-    private int gameState = 0;
-    private JLabel description;
-    private Image backgroundIMG= new ImageIcon("Images/Path5/lakeBG.jpg").getImage();
+    protected JPanel button_panel;
+    protected JButton[] buttons = new JButton[3];
+    protected JButton restartBtn;
+    protected int gameState = 0;
+    protected JLabel description;
+    public Image backgroundIMG = new ImageIcon("Images/Path5/lakeBG.jpg").getImage();
+    int restartCount = 0;
+    int bgUpdateCount = 0;
 
     //Visar fönstret
     public Path5(){
@@ -33,7 +35,7 @@ public class Path5 extends JFrame{
         //Visar bakgrundsbild
         button_panel = new JPanel(){
             @Override
-            protected void paintComponent(Graphics g) {
+            protected void paintComponent(Graphics g){
                 super.paintComponent(g);
                 Image bgImage = new ImageIcon(backgroundIMG).getImage();
                 if (backgroundIMG != null){
@@ -77,7 +79,8 @@ public class Path5 extends JFrame{
     }
 
     //Startar om spelet
-    private void restart(){
+    protected void restart(){
+        restartCount++;
         gameState = 0;
         updateScene();
         for (JButton button : buttons){
@@ -89,7 +92,7 @@ public class Path5 extends JFrame{
     }
 
     //Uppdaterar scenen baserat på "gameState"
-    private void updateScene(){
+    protected void updateScene(){
         switch (gameState){
             //Scen 1
             case 0:
@@ -115,19 +118,20 @@ public class Path5 extends JFrame{
                 //Lägg till fler case här
         }
         //Justerar storleken på knapparna
-        for (JButton button : buttons) {
+        for (JButton button : buttons){
             adjustButtonSize(button);
         }
     }
 
     //Uppdaterar bakgrunden
-    private void updateBG(String imagePath) {
+    protected void updateBG(String imagePath){
         backgroundIMG = new ImageIcon(imagePath).getImage();
         button_panel.repaint(); //Byter bakgrundsbild
+        bgUpdateCount++;
     }
 
     //Justerar storleken på knapp baserat på text
-    private void adjustButtonSize(JButton button) {
+    protected void adjustButtonSize(JButton button){
         FontMetrics metrics = button.getFontMetrics(button.getFont());
         int width = metrics.stringWidth(button.getText()) + 40; //40 är marginalen runt texten på knapparna
         int height = button.getHeight();
@@ -187,7 +191,7 @@ public class Path5 extends JFrame{
                             updateScene();
                             description.setText("Du väckte monstret");
                             //func.Die();
-                        } else { //Vinstscen
+                        } else{ //Vinstscen
                             updateBG("Images/win.png");
                             for (JButton button : buttons) {
                                 button.setVisible(false); //Gömmer knapparna 
@@ -208,7 +212,7 @@ public class Path5 extends JFrame{
         }
         
         //Uppdaterar gameState
-        private void proceedToNextState() {
+        private void proceedToNextState(){
             gameState = (gameState + 1) % 3; //Ändra 3an till antalet scener (gameStates) som faktiskt används
             updateScene();
         }
