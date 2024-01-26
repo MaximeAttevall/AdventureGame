@@ -3,11 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+//import java.io.IOException;
 
 public class Path5 extends JFrame{
     private JPanel button_panel;
     private JButton[] buttons = new JButton[3];
+    private JButton restartBtn;
     private int gameState = 0;
     private JLabel description;
     private Image backgroundIMG= new ImageIcon("Images/Path5/lakeBG.jpg").getImage();
@@ -31,13 +32,14 @@ public class Path5 extends JFrame{
             }
         };
         description = new JLabel("", SwingConstants.CENTER);
-        description.setBounds(50, 150, 700, 100); // Justera texten
-        description.setForeground(Color.WHITE); // Justera textfärg
+        description.setBounds(50, 150, 700, 100); //Justera texten
+        description.setForeground(Color.WHITE); //Justera textfärg
         description.setFont(new Font("Serif", Font.BOLD, 24));
         button_panel.add(description);
         button_panel.setLayout(null);
         addButtons();
         add(button_panel);
+        createRestartBtn();
     }
 
     private void addButtons(){
@@ -48,6 +50,25 @@ public class Path5 extends JFrame{
             button_panel.add(buttons[i]);
         }
         updateScene();
+    }
+
+    private void createRestartBtn(){
+        restartBtn = new JButton("Börja om");
+        restartBtn.setBounds(20, 500, 200, 30);
+        restartBtn.addActionListener(e -> restart());
+        restartBtn.setVisible(false);
+        button_panel.add(restartBtn);
+    }
+
+    private void restart(){
+        gameState = 0;
+        updateScene();
+        for (JButton button : buttons){
+            button.setVisible(true);
+        }
+        restartBtn.setVisible(false);
+        updateBG("Images/Path5/lakeBG.jpg");
+        description.setForeground(Color.WHITE);
     }
 
     private void updateScene(){
@@ -85,7 +106,7 @@ public class Path5 extends JFrame{
 
     private void adjustButtonSize(JButton button) {
         FontMetrics metrics = button.getFontMetrics(button.getFont());
-        int width = metrics.stringWidth(button.getText()) + 40; //40 är marginalen i px
+        int width = metrics.stringWidth(button.getText()) + 40; //40 är marginalen runt texten på knapparna
         int height = button.getHeight();
         button.setPreferredSize(new Dimension(width, height));
         button.setBounds(button.getX(), button.getY(), width, height);
@@ -96,17 +117,18 @@ public class Path5 extends JFrame{
         public void actionPerformed(ActionEvent e){
             JButton clickedButton = (JButton) e.getSource();
             
-            try{
+            //try{
                 switch (gameState){
                     case 0:
                         if (clickedButton == buttons[1] || clickedButton == buttons[2]){
                             updateBG("Images/Path5/drownedBG.jpg");
                             for (JButton button : buttons) {
-                                button.setVisible(false); // eller button.setEnabled(false) om du vill inaktivera dem istället
+                                button.setVisible(false); //Gömmer knapparna
                             }
+                            restartBtn.setVisible(true);
                             updateScene();
                             description.setText("Du drunknade");
-                            func.Die();
+                            //func.Die();
                         } else {
                             updateBG("Images/Path5/shroomsBG.jpg");
                             proceedToNextState();
@@ -117,11 +139,12 @@ public class Path5 extends JFrame{
                         if (clickedButton == buttons[0] || clickedButton == buttons[1]){
                             updateBG("Images/Path5/wrongTurnBG.jpg");
                             for (JButton button : buttons) {
-                                button.setVisible(false); // eller button.setEnabled(false) om du vill inaktivera dem istället
+                                button.setVisible(false); //Gömmer knapparna
                             }
+                            restartBtn.setVisible(true);
                             updateScene();
                             description.setText("Det ledde dig till ett stup");
-                            func.Die();
+                            //func.Die();
                         } else {
                             updateBG("Images/Path5/monsterGuardBG.jpg");
                             proceedToNextState();
@@ -131,27 +154,30 @@ public class Path5 extends JFrame{
                         if (clickedButton == buttons[0] || clickedButton == buttons[1]){
                             updateBG("Images/Path5/wokeMonsterBG.jpg");
                             for (JButton button : buttons) {
-                                button.setVisible(false); // eller button.setEnabled(false) om du vill inaktivera dem istället
+                                button.setVisible(false); //Gömmer knapparna
                             }
+                            restartBtn.setVisible(true);
                             updateScene();
-                            description.setText("Monstret åt upp dig");
-                            func.Die();
+                            description.setText("Du väckte monstret");
+                            //func.Die();
                         } else {
                             updateBG("Images/win.png");
                             for (JButton button : buttons) {
-                                button.setVisible(false); // eller button.setEnabled(false) om du vill inaktivera dem istället
+                                button.setVisible(false); //Gömmer knapparna 
                             }
+                            restartBtn.setVisible(true);
                             updateScene();
+                            description.setForeground(Color.BLACK);
                             description.setText("Du hittade utgången");
-                            func.Win();
+                            //func.Win();
                         }
                         break;
                     // Lägg till fler case om nödvändigt
                 }
-            }
-            catch(IOException x){
-                x.printStackTrace();
-            }
+            //}
+            //catch(IOException x){
+            //    x.printStackTrace();
+            //}
         }
         
         private void proceedToNextState() {
