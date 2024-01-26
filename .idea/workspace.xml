@@ -5,71 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00b0ec56-622f-41ca-b9e4-e01066e0e51b" name="Changes" comment="ändrar repons struktur så alla .class ignoreras så slipper vi de binära filerna">
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/AdventureGame$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/AdventureGame$GamePanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/AdventureGame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/AdventureGame.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/3door.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Deer.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Dining.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Grotta2_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Grotta2_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Grotta2_3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Option1A.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Option1B.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/drownedBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/lakeBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/monsterGuardBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/shroomsBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/wokeMonsterBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/Path5/wrongTurnBG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/TwoPaths.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/butler.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/castle.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/darkcaveny.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/deathsceneforall.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/deathyas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/grottayas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/hall.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/hurtmonster.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/mahmud.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/monsterclick1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/monsterclick2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/monsterdeathscene.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/mosntervag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/option2-win.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/testdrka.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/vag2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/win.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Images/youdied.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path1$BackgroundPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$6.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3$7.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path3Test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path5$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path5$ButtonListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Path5.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/AdventureGame/func.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Path2Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/funcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Path2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Path2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/func.java" beforeDir="false" afterPath="$PROJECT_DIR$/func.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -109,10 +61,14 @@
   "keyToString": {
     "Application.AdventureGame.executor": "Run",
     "JUnit.Path2Test.executor": "Run",
+    "JUnit.funcTest.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "bengt",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "TestPeter",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -122,6 +78,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="AdventureGame" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AdventureGame" />
@@ -173,7 +137,14 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1706263635957</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="Tester för func och Path2">
+      <option name="closed" value="true" />
+      <created>1706274440038</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1706274440038</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +152,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ändrar repons struktur så alla .class ignoreras så slipper vi de binära filerna" />
-    <option name="LAST_COMMIT_MESSAGE" value="ändrar repons struktur så alla .class ignoreras så slipper vi de binära filerna" />
+    <MESSAGE value="Tester för func och Path2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tester för func och Path2" />
   </component>
 </project>
