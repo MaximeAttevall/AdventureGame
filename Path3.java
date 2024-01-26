@@ -18,7 +18,7 @@ public class Path3 {
 
     private JLayeredPane layeredPane;
 
-    private JFrame frame;
+    public JFrame frame;
 
     private JPanel buttonPanel;
     private JPanel gamePanel;
