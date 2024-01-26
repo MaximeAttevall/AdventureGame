@@ -171,6 +171,7 @@ public class Path1 {
                 "Yes", "No",
                 Path1::ToScene7, Path1::ToScene2);
     }
+
     private static void ToScene7(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You exit the woods!");
 
@@ -190,6 +191,7 @@ public class Path1 {
                 "Castle", "Woods",
                 Path1::ToScene9, Path1::ToScene1);
     }
+
     public static void ToScene9(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You enter the castle");
 
@@ -214,6 +216,7 @@ public class Path1 {
                 "Walk forward", "Turn around",
                 Path1::ToScene2, Path1::ToScene2);
     }
+
     private static void ToScene11(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You enter the dining area, with prepared meals in front of you");
 
@@ -224,6 +227,7 @@ public class Path1 {
                 "1", "2",
                 Path1::ToScene12, Path1::ToScene2);
     }
+
     private static void ToScene12(ActionEvent e) {
         JOptionPane.showMessageDialog(frame, "You suddendly appear in front of a strange deer in the woods");
 
@@ -237,33 +241,43 @@ public class Path1 {
 
     private static void updateBackground() {
         try {
+            // Läser en image file från våran currentbackgroundpath
             BufferedImage backgroundImage = ImageIO.read(new File(currentBackgroundPath));
+            // Skapar en instans med backgroundimage som parameter
             BackgroundPanel backgroundPanel = new BackgroundPanel(backgroundImage);
+            // Sätter så backgroundpanel blir det som visas i vår Jframe
             frame.setContentPane(backgroundPanel);
+            // Uppdaterar/validerar så ändringar går igenom ordentlig
             frame.validate();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // Stänger ner vår frame.
+    private static void showGameOverMessage() {
+        JOptionPane.showMessageDialog(frame, "No choice was made. The adventure is over.");
+        frame.dispose();
+    }
+
     private static class BackgroundPanel extends JPanel {
         private final BufferedImage backgroundImage;
 
+        // Sätter igång med backgroundimage med den bakgrundsbild som vi använder för olika scener
         public BackgroundPanel(BufferedImage backgroundImage) {
             this.backgroundImage = backgroundImage;
         }
 
         @Override
         protected void paintComponent(Graphics g) {
+            // Super.paintcomponent metod anrop inom Swing sin helt ocyh håller färgar om bakgrunds färgen helt och hållet.
+            // I vårt fall med bilder.
+            //https://quarkphysics.ca/ICS4U1/unit4-graphics/paintComponent.html
             super.paintComponent(g);
+            // Om bakgrundsImage inte är null så "ritar" vi på vår Jframe genom g-drawImage och bilden är skalad för att anpassa sig till framen.
             if (backgroundImage != null) {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         }
-    }
-
-    private static void showGameOverMessage() {
-        JOptionPane.showMessageDialog(frame, "No choice was made. The adventure is over.");
-        frame.dispose();
     }
 }
