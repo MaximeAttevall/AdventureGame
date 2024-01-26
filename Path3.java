@@ -7,48 +7,44 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.Random;
-
-
 
 public class Path3 {
     private BufferedImage background;
-
     private JLayeredPane layeredPane;
-
     public JFrame frame;
-
     private JPanel buttonPanel;
     private JPanel gamePanel;
-
     private Timer monsterSpawnTimer;
     private int monstersKilled = 0;
     private final int totalMonsters = 10;
     private List<Timer> monsterAnimationTimers = new ArrayList<>();
 
     public Path3() {
-        loadImages();
-        initComponents();
-        System.out.println("Code from Path3 is now running...");
+        loadImages(); // Laddar in bilder
+        initComponents(); // Initialiserar komponenter
+        System.out.println("Koden från Path3 körs nu...");
     }
 
+    // Laddar bakgrundsbilden
     private void loadImages() {
         try {
-            background = ImageIO.read(new File("images/grottayas.png")); // Ensure this path is correct
+            background = ImageIO.read(new File("images/grottayas.png")); // Kontrollera att denna sökväg är korrekt
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to load images.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kunde inte ladda bilderna.", "Fel", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
-/*
+
+    // Initiera gränssnittskomponenter
     private void initComponents() {
         frame = new JFrame("Path3");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close only this window
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
+        layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(800, 600));
 
         gamePanel = new JPanel() {
             @Override
@@ -59,80 +55,26 @@ public class Path3 {
                 }
             }
         };
-
+        gamePanel.setBounds(0, 0, 800, 600);
+        gamePanel.setOpaque(false);
         gamePanel.setLayout(new BorderLayout());
 
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        buttonPanel.setBounds(0, 500, 800, 100);
         buttonPanel.setOpaque(false);
 
-        addButton("Option 1");
-        addButton("Option 2");
+        addButton("Utforska djupare i grottan");
+        addButton("Titta runt");
 
-        gamePanel.add(buttonPanel, BorderLayout.SOUTH);
-        frame.add(gamePanel);
+        layeredPane.add(gamePanel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(buttonPanel, JLayeredPane.PALETTE_LAYER);
 
+        frame.add(layeredPane);
         frame.setSize(800, 600);
         frame.setVisible(true);
-
-
-        gamePanel.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                super.componentShown(e);
-                gamePanel.removeComponentListener(this); // Remove the listener after the panel is shown
-            }
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
-                gamePanel.removeComponentListener(this); // Remove the listener after the panel is resized
-            }
-        });
-
     }
-*/
-private void initComponents() {
-    frame = new JFrame("Path3");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setLayout(new BorderLayout());
 
-
-
-    JLayeredPane layeredPane = new JLayeredPane();
-    layeredPane.setPreferredSize(new Dimension(800, 600));
-
-
-    gamePanel = new JPanel() {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (background != null) {
-                g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), this);
-            }
-        }
-    };
-    gamePanel.setBounds(0, 0, 800, 600);
-    gamePanel.setOpaque(false); // Ensure gamePanel is transparent
-    gamePanel.setLayout(new BorderLayout()); // Set layout
-
-    buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
-    buttonPanel.setBounds(0, 500, 800, 100); // Adjust the bounds as per your need
-    buttonPanel.setOpaque(false); // Ensure buttonPanel is transparent
-
-    addButton("Go deeper in cave");
-    addButton("Have a look around");
-
-    // Add the panels to the layered pane
-    layeredPane.add(gamePanel, JLayeredPane.DEFAULT_LAYER); // Add gamePanel to default layer
-    layeredPane.add(buttonPanel, JLayeredPane.PALETTE_LAYER); // Add buttonPanel to a higher layer
-
-
-    frame.add(layeredPane); // Add layeredPane to the frame
-
-    frame.setSize(800, 600);
-    frame.setVisible(true);
-}
-
+    // Lägg till knappar och definiera deras stil och funktion
 
     private void addButton(String text) {
         JButton button = new JButton(text);
@@ -141,31 +83,27 @@ private void initComponents() {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ("Go deeper in cave".equals(text)) {
+                if ("Utforska djupare i grottan".equals(text)) {
                     changeBackgroundImage("images/vag2.png");
-                    updateButtonPanel(new String[]{"Keep going", "Look around"});
-                } else if ("Have a look around".equals(text)) {
+                    updateButtonPanel(new String[]{"Fortsätt", "Titta runt"});
+                } else if ("Titta runt".equals(text)) {
                     changeBackgroundImage("images/mosntervag.png");
                     buttonPanel.removeAll();
                     spawnMonsters();
-                } else if ("Look around".equals(text)) {
-
-                    changeBackgroundImage("images/mosntervag.png");
-                    buttonPanel.removeAll();
-                    spawnMonsters();
-                } else if ("Keep going".equals(text)) {
+                } else if ("Fortsätt".equals(text)) {
                     changeBackgroundImage("images/option2-win.png");
-                    updateButtonPanel(new String[]{"Use the latter to climb", "Keep going!"});
-                } else if ("Keep going!".equals(text)) {
+                    updateButtonPanel(new String[]{"Använd stegen för att klättra", "Fortsätt!"});
+                } else if ("Fortsätt!".equals(text)) {
+                    // Ändring här: "Fortsätt!" knappen kommer nu att trigga monster scenen
                     changeBackgroundImage("images/mosntervag.png");
                     buttonPanel.removeAll();
                     spawnMonsters();
-                } else if ("Use the latter to climb".equals(text)) {
+                } else if ("Använd stegen för att klättra".equals(text)) {
                     changeBackgroundImage("images/win.png");
                     buttonPanel.removeAll();
-                    JOptionPane.showMessageDialog(frame, "Congratulations you made it out of the cave!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Grattis, du tog dig ut ur grottan!", "Grattis", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "You clicked: " + text, "Button Clicked", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Du klickade: " + text, "Knapp klickad", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -173,6 +111,8 @@ private void initComponents() {
         buttonPanel.add(button);
     }
 
+
+    // Styla knapparna
     private void styleButton(JButton button) {
         button.setFont(new Font("Pixel Emulator", Font.BOLD, 18));
         button.setFocusPainted(false);
@@ -194,8 +134,9 @@ private void initComponents() {
         });
     }
 
+    // Skapa monster
     private void spawnMonsters() {
-        System.out.println("spawnMonsters is called");
+        System.out.println("Monsters skapas...");
 
         monsterSpawnTimer = new Timer(1000, new ActionListener() {
             private int spawnedMonsters = 0;
@@ -213,6 +154,7 @@ private void initComponents() {
         monsterSpawnTimer.start();
     }
 
+    // Lägg till monster i spelet
     private void addMonster(String imagePath1, String imagePath2) {
         try {
             gamePanel.setLayout(null);
@@ -231,7 +173,7 @@ private void initComponents() {
             gamePanel.add(monsterLabel);
             gamePanel.revalidate();
             gamePanel.repaint();
-            System.out.println("Monster spawning at x: " + initialX + ", y: " + initialY);
+            System.out.println("Monster skapas på x: " + initialX + ", y: " + initialY);
 
             Timer monsterTimer = animateMonster(monsterLabel, monsterImage);
             monsterLabel.addMouseListener(new MouseAdapter() {
@@ -242,11 +184,12 @@ private void initComponents() {
             });
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to load monster image.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kunde inte ladda monsterbild.", "Fel", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
+    // Animera monster på spelet
     private Timer animateMonster(JLabel monsterLabel, BufferedImage monsterImage) {
         Timer animationTimer = new Timer(100, null);
         Point originalCenter = new Point(monsterLabel.getX() + monsterLabel.getWidth() / 2,
@@ -257,122 +200,76 @@ private void initComponents() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                scale += 0.05;
-                int newWidth = (int) (100 * scale);
-                int newHeight = (int) (100 * scale);
+                scale += 0.05; // Öka skalan för att få monstret att växa
+                int newWidth = (int) (100 * scale); // Beräkna ny bredd
+                int newHeight = (int) (100 * scale); // Beräkna ny höjd
 
-
+                // Beräkna ny position för att hålla monstret centrerat
                 int newX = originalCenter.x - newWidth / 2;
                 int newY = originalCenter.y - newHeight / 2;
 
-                // Adjust position if out of bounds
+                // Justera positionen om den är utanför gränserna
                 if (newX < 0) newX = 0;
                 if (newY < 0) newY = 0;
                 if (newX + newWidth > gamePanel.getWidth()) newX = gamePanel.getWidth() - newWidth;
                 if (newY + newHeight > gamePanel.getHeight()) newY = gamePanel.getHeight() - newHeight;
 
-                monsterLabel.setBounds(newX, newY, newWidth, newHeight);
+                monsterLabel.setBounds(newX, newY, newWidth, newHeight); // Uppdatera monstrets position och storlek
 
-
+                // Om monstret når gränserna för spelpanelen, stoppa animationen och trigga dödsscenen
                 if (newWidth >= gamePanel.getWidth() || newHeight >= gamePanel.getHeight()) {
                     animationTimer.stop();
                     triggerDeathScene();
                 } else {
-
+                    // Uppdatera bilden av monstret för att matcha den nya skalan
                     monsterLabel.setIcon(new ImageIcon(monsterImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH)));
                 }
             }
         });
 
-        animationTimer.start();
-        monsterAnimationTimers.add(animationTimer);
+        animationTimer.start(); // Starta timer som hanterar animationen
+        monsterAnimationTimers.add(animationTimer); // Lägg till timern i listan för att kunna hantera den senare
         return animationTimer;
     }
 
-/*
-    private void killMonster(JLabel monsterLabel, Timer monsterTimer) {
-        try {
-            BufferedImage deathSceneImage = ImageIO.read(new File("images/monsterdeathscene.png"));
-            monsterLabel.setIcon(new ImageIcon(deathSceneImage.getScaledInstance(monsterLabel.getWidth(), monsterLabel.getHeight(), Image.SCALE_SMOOTH)));
-
-            Timer fadeTimer = new Timer(100, null);
-            fadeTimer.addActionListener(new ActionListener() {
-                private float opacity = 1.0f;
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    opacity -= 0.1f;
-                    if (opacity <= 0.0f) {
-                        fadeTimer.stop();
-                        gamePanel.remove(monsterLabel);
-                        gamePanel.revalidate();
-                        gamePanel.repaint();
-                    } else {
-                        Image translucentImage = makeImageTranslucent(deathSceneImage, opacity);
-                        monsterLabel.setIcon(new ImageIcon(translucentImage));
-                    }
-                }
-            });
-            fadeTimer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to load death scene image.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        monstersKilled++;
-        monsterTimer.stop(); // Stop the animation for this monster
-        if (monstersKilled == totalMonsters) {
-            if (monsterSpawnTimer != null) {
-                monsterSpawnTimer.stop(); // Ensure no more monsters are spawned
-            }
-            showClearStagePopup();
-        }
-    }
-*/
-
-    /*SKIT KOD*/
+    /* Döda monster */
     private void killMonster(JLabel monsterLabel, Timer monsterTimer) {
         final Timer[] fadeTimer = {null};
 
         try {
-
+            // Läs in bild för skadat monster
             BufferedImage hurtImage = ImageIO.read(new File("images/hurtmonster.png"));
 
-
+            // Centrera den skadade bilden på monstret
             int centerX = (monsterLabel.getWidth() - hurtImage.getWidth()) / 2;
             int centerY = (monsterLabel.getHeight() - hurtImage.getHeight()) / 2;
 
-
+            // Skapa en ny bild som kombinerar monsterbilden och bilden för skadat monster
             BufferedImage combinedImage = new BufferedImage(monsterLabel.getWidth(), monsterLabel.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = combinedImage.createGraphics();
 
-
+            // Läs in bilden för dödsscenen
             BufferedImage deathSceneImage = ImageIO.read(new File("images/monsterdeathscene.png"));
-            g2d.drawImage(deathSceneImage, 0, 0, null);
+            g2d.drawImage(deathSceneImage, 0, 0, null); // Rita dödsscenen
+            g2d.drawImage(hurtImage, centerX, centerY, null); // Rita den skadade bilden över dödsscenen
+            g2d.dispose(); // Rensa upp grafikkontexten
 
+            monsterLabel.setIcon(new ImageIcon(combinedImage)); // Uppdatera monstrets bild till den kombinerade bilden
 
-            g2d.drawImage(hurtImage, centerX, centerY, null);
-
-            g2d.dispose();
-
-
-            monsterLabel.setIcon(new ImageIcon(combinedImage));
-
-
+            // Skapa en timer som långsamt gör bilden genomskinlig för att visa en bleknande effekt
             fadeTimer[0] = new Timer(100, new ActionListener() {
                 private float opacity = 1.0f;
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    opacity -= 0.1f;
+                    opacity -= 0.1f; // Minska opaciteten
                     if (opacity <= 0.0f) {
-                        fadeTimer[0].stop();
-                        // Remove the 'monsterdeathscene.png' image
-                        gamePanel.remove(monsterLabel);
+                        fadeTimer[0].stop(); // Stoppa timern när bilden är helt genomskinlig
+                        gamePanel.remove(monsterLabel); // Ta bort monstret från spelpanelen
                         gamePanel.revalidate();
                         gamePanel.repaint();
                     } else {
-                        // Apply fade effect to 'monsterdeathscene.png' image
+                        // Skapa en genomskinlig version av bilden och uppdatera monstrets bild
                         Image translucentImage = makeImageTranslucent(deathSceneImage, opacity);
                         monsterLabel.setIcon(new ImageIcon(translucentImage));
                     }
@@ -380,207 +277,164 @@ private void initComponents() {
             });
             fadeTimer[0].setRepeats(true);
             fadeTimer[0].setCoalesce(true);
-            fadeTimer[0].start();
+            fadeTimer[0].start(); // Starta timern för blekningseffekten
 
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to load images.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kunde inte ladda bilder.", "Fel", JOptionPane.ERROR_MESSAGE);
         }
 
-
         monstersKilled++;
-        monsterTimer.stop();
+        monsterTimer.stop(); // Stoppa monstrets animations-timer
         if (monstersKilled == totalMonsters) {
             if (monsterSpawnTimer != null) {
-                monsterSpawnTimer.stop();
+                monsterSpawnTimer.stop(); // Stoppa spawn-timern om alla monster är döda
             }
-            showClearStagePopup();
+            showClearStagePopup(); // Visa meddelande om att scenen är avklarad
         }
     }
 
-
+    // Visar popup när en scen är klar
     private void showClearStagePopup() {
+        // Stoppa alla timers relaterade till monster spawn
         if (monsterSpawnTimer != null) {
             monsterSpawnTimer.stop();
         }
 
-
+        // Stoppa alla animations-timers för monster
         for (Timer timer : monsterAnimationTimers) {
             timer.stop();
         }
-        monsterAnimationTimers.clear();
+        monsterAnimationTimers.clear(); // Rensa listan av monster animations-timers
 
-
+        // Rensa spelpanelen och uppdatera den
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
 
+        // Visa popup meddelande om att spelaren har klarat scenen
+        JOptionPane.showMessageDialog(frame, "Du klarade scenen! Tryck på 'OK' för att fortsätta.", "Scen Avklarad", JOptionPane.INFORMATION_MESSAGE);
 
-        JOptionPane.showMessageDialog(frame, "You cleared the stage! Press 'OK' to proceed.", "Stage Cleared", JOptionPane.INFORMATION_MESSAGE);
-
-
+        // Gå vidare till nästa scen
         proceedToNextStage();
     }
+
+    // Gör en bild genomskinlig baserat på angiven alpha-värde
     private Image makeImageTranslucent(BufferedImage image, float alpha) {
         BufferedImage aimg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TRANSLUCENT);
         Graphics2D g = aimg.createGraphics();
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        g.drawImage(image, 0, 0, null);
-        g.dispose();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha)); // Ställ in alpha komposit
+        g.drawImage(image, 0, 0, null); // Rita bilden med den nya genomskinligheten
+        g.dispose(); // Rensa upp grafikkontexten
         return aimg;
     }
 
+    // Gå vidare till nästa scen
     private void proceedToNextStage() {
+        // Ändra bakgrundsbilden för att representera nästa scen
         changeBackgroundImage("images/win.png");
-        gamePanel.removeAll();
-        buttonPanel.removeAll();
-        JOptionPane.showMessageDialog(frame, "Congratulations, you made it out of the cave!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-
-
+        gamePanel.removeAll(); // Rensa spelpanelen
+        buttonPanel.removeAll(); // Rensa knappanelen
+        // Visa popup meddelande om att spelaren har klarat spelet
+        JOptionPane.showMessageDialog(frame, "Grattis, du tog dig ut ur grottan!", "Grattis", JOptionPane.INFORMATION_MESSAGE);
     }
-/*
-private void proceedToNextStage() {
-    SwingUtilities.invokeLater(() -> {
-        changeBackgroundImage("images/option2-win.png");
-        gamePanel.removeAll();
-        buttonPanel.removeAll();
 
-        // Reset the size or layout of gamePanel or layeredPane if needed
-        gamePanel.setPreferredSize(new Dimension(800, 600)); // Example, set to your needed dimensions
-
-        // Add "Keep going!" button
-        JButton keepGoingButton = new JButton("Keep going!");
-        keepGoingButton.addActionListener(e -> {
-            try {
-                changeBackgroundImage("images/mosntervag.png");
-                gamePanel.removeAll();
-                buttonPanel.removeAll();
-                spawnMonsters();
-                buttonPanel.revalidate();
-                buttonPanel.repaint();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        buttonPanel.add(keepGoingButton);
-        styleButton(keepGoingButton);
-
-        // Add "Use the ladder to climb" button
-        JButton useLadderButton = new JButton("Use the ladder to climb");
-        useLadderButton.addActionListener(e -> {
-            changeBackgroundImage("images/win.png");
-            showClearStagePopup();
-            buttonPanel.removeAll();
-            JOptionPane.showMessageDialog(frame, "Congratulations, you made it out of the cave!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-
-        });
-        buttonPanel.add(useLadderButton);
-        styleButton(useLadderButton);
-
-        spawnMonsters();
-
-        gamePanel.revalidate();
-        gamePanel.repaint();
-    });
-}
-*/
-
-
+    // Ändra bakgrundsbilden
     private void changeBackgroundImage(String imagePath) {
         try {
-            background = ImageIO.read(new File(imagePath));
-            gamePanel.repaint();
+            background = ImageIO.read(new File(imagePath)); // Läs in den nya bakgrundsbilden
+            gamePanel.repaint(); // Uppdatera spelpanelen för att visa den nya bilden
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to load image: " + imagePath, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kunde inte ladda bilden: " + imagePath, "Fel", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    // Uppdatera knappanelen med nya knappar
     private void updateButtonPanel(String[] buttonLabels) {
-        buttonPanel.removeAll();
+        buttonPanel.removeAll(); // Rensa knappanelen
 
+        // Lägg till nya knappar baserade på angivna etiketter
         for (String label : buttonLabels) {
             addButton(label);
         }
 
-        buttonPanel.revalidate();
-        buttonPanel.repaint();
+        buttonPanel.revalidate(); // Validera knappanelen för att inkludera de nya knapparna
+        buttonPanel.repaint(); // Uppdatera visningen av knappanelen
     }
 
+    // Trigger för dödsscenen
     private void triggerDeathScene() {
-
         if (monsterSpawnTimer != null) {
-            monsterSpawnTimer.stop();
+            monsterSpawnTimer.stop(); // Stoppa timer för monster spawn
         }
 
+        stopAllMonsterAnimations(); // Stoppa alla monster animationer
 
-        stopAllMonsterAnimations();
-
-
+        // Rensa och uppdatera spelpanelen
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
 
+        monstersKilled = 0; // Återställ antal dödade monster
+        monsterAnimationTimers.clear(); // Rensa listan av monster animations-timers
 
-        monstersKilled = 0;
-        monsterAnimationTimers.clear();
+        changeBackgroundImage("images/deathyas.png"); // Ändra bakgrundsbilden till dödsscenen
 
-
-        changeBackgroundImage("images/deathyas.png");
-
-
+        // Rensa och uppdatera knappanelen
         buttonPanel.removeAll();
         buttonPanel.revalidate();
         buttonPanel.repaint();
 
-
-        showDeathPopup();
+        showDeathPopup(); // Visa popup för dödsscenen
     }
 
-
+    // Visa popup för dödsscenen
     private void showDeathPopup() {
         int choice = JOptionPane.showConfirmDialog(
                 frame,
-                "You died! Press 'Restart' to try again.",
-                "Game Over",
+                "Du dog! Tryck på 'Starta om' för att försöka igen.",
+                "Spelet är över",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE);
 
         if (choice == JOptionPane.OK_OPTION) {
-            restartGame();
+            restartGame(); // Starta om spelet om spelaren väljer att göra det
         } else {
-            frame.dispose();
+            frame.dispose(); // Stäng av spelet om spelaren väljer att inte starta om
         }
     }
 
+    // Starta om spelet
     private void restartGame() {
-
         if (monsterSpawnTimer != null) {
-            monsterSpawnTimer.stop();
+            monsterSpawnTimer.stop(); // Stoppa timer för monster spawn
         }
-        stopAllMonsterAnimations();
+        stopAllMonsterAnimations(); // Stoppa alla monster animationer
 
-        gamePanel.removeAll();
-        monstersKilled = 0;
+        gamePanel.removeAll(); // Rensa spelpanelen
+        monstersKilled = 0; // Återställ antal dödade monster
 
-        loadImages();
-        initComponents();
-        frame.revalidate();
-        frame.repaint();
+        loadImages(); // Ladda om bilderna
+        initComponents(); // Initiera komponenterna på nytt
+        frame.revalidate(); // Validera ramen på nytt
+        frame.repaint(); // Uppdatera visningen av ramen
     }
+
+    // Stoppa alla monster animationer
 
     private void stopAllMonsterAnimations() {
         for (Timer timer : monsterAnimationTimers) {
             if (timer != null) {
-                timer.stop();
+                timer.stop(); // Stoppar timer i listan
             }
         }
-        monsterAnimationTimers.clear();
+        monsterAnimationTimers.clear(); // Rensar listan av animations monster
     }
 
+    // Startar spelet
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Path3());
+        SwingUtilities.invokeLater(() -> new Path3()); // startar spelet event
     }
 }
+
